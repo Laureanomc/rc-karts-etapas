@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RC Karts — Etapas de validación</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* PARA ACTUALIZAR: cambiar la clase de cada <li> (ok | curso | pend | espera)
+   y la clase de cada etapa (ok | curso | pend). Actualizado: ver fecha abajo. */
+:root{
+  --bg:#f6f7f9; --card:#fff; --ink:#1d2330; --mute:#667085; --line:#d0d5dd;
+  --ok:#12805c; --ok-bg:#e3f5ec; --cur:#b54708; --cur-bg:#fef0c7;
+  --pend:#475467; --pend-bg:#eef0f3; --esp:#3b5bdb; --esp-bg:#e5ebff;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#14161b; --card:#1d2027; --ink:#e7e9ee; --mute:#98a2b3; --line:#343a46;
+  --ok:#4ccb8f; --ok-bg:#16352a; --cur:#f5b54a; --cur-bg:#3a2c12;
+  --pend:#a4adbd; --pend-bg:#262a33; --esp:#8ea6ff; --esp-bg:#1f2747; }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Roboto,system-ui,sans-serif;padding:24px 16px 48px}
+.wrap{max-width:920px;margin:0 auto}
+h1{font-size:24px;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 16px}
+.leyenda{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:3px 10px;border-radius:999px;font-weight:500}
+.chip::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.c-ok{color:var(--ok);background:var(--ok-bg)} .c-curso{color:var(--cur);background:var(--cur-bg)}
+.c-pend{color:var(--pend);background:var(--pend-bg)} .c-espera{color:var(--esp);background:var(--esp-bg)}
+
+.etapa{position:relative;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--pend);border-radius:12px;padding:16px 18px;margin:0 0 36px}
+.etapa.ok{border-left-color:var(--ok)} .etapa.curso{border-left-color:var(--cur)}
+.etapa:not(:last-child)::after{content:"";position:absolute;left:50%;bottom:-30px;width:2px;height:22px;background:var(--line)}
+.etapa:not(:last-child)::before{content:"";position:absolute;left:calc(50% - 6px);bottom:-32px;border:7px solid transparent;border-top:9px solid var(--line);border-bottom:0}
+.cab{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.num{font-weight:700;font-size:13px;color:var(--mute);letter-spacing:.06em}
+.cab h2{font-size:18px;margin:0;flex:1}
+.estado{font-size:12px}
+.que{color:var(--mute);margin:4px 0 10px}
+ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+li{display:flex;gap:10px;align-items:flex-start;padding:6px 10px;border-radius:8px;background:var(--pend-bg)}
+li::before{flex:none;width:18px;text-align:center;font-weight:700}
+li.ok{background:var(--ok-bg)} li.ok::before{content:"✓";color:var(--ok)}
+li.curso{background:var(--cur-bg)} li.curso::before{content:"●";color:var(--cur)}
+li.pend::before{content:"○";color:var(--pend)}
+li.espera{background:var(--esp-bg)} li.espera::before{content:"⧗";color:var(--esp)}
+li b{font-weight:500}
+.ref{color:var(--mute);font-size:13px}
+.puerta{margin-top:12px;padding:10px 12px;border:1px dashed var(--line);border-radius:8px;font-size:14px}
+.puerta strong{color:var(--ink)}
+.pie{color:var(--mute);font-size:13px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>RC Karts — Etapas de validación</h1>
+<p class="sub">Cada etapa se cierra cuando se cumple su <b>puerta</b>. No se pasa a la siguiente con riesgos abiertos en la anterior. <b>Objetivo: UN auto con todas las tecnologías validadas y preparadas (etapas 0–5). Los 8 puestos se planificarán después.</b></p>
+<div class="leyenda">
+  <span class="chip c-ok">Hecho</span><span class="chip c-curso">Siguiente / en curso</span>
+  <span class="chip c-pend">Pendiente</span><span class="chip c-espera">Esperando material</span>
+</div>
+
+<section class="etapa ok">
+  <div class="cab"><span class="num">ETAPA 0</span><h2>Software y simulación</h2><span class="chip c-ok estado">Cerrada</span></div>
+  <p class="que">Todo lo que se puede validar sin hardware.</p>
+  <ul>
+    <li class="ok"><span><b>Servidor + panel de control de pista</b> <span class="ref">2a</span></span></li>
+    <li class="ok"><span><b>Ajustes de conducción</b> (expo, rampa, marcha atrás, trim) <span class="ref">2b</span></span></li>
+    <li class="ok"><span><b>Simulador</b> 10 autos / 8 pilotos con fallos inyectables <span class="ref">2d</span></span></li>
+    <li class="ok"><span><b>HUD por puesto</b> + idiomas + PixelPilot con capa de carrera en el móvil <span class="ref">2e, C7</span></span></li>
+  </ul>
+  <div class="puerta"><strong>Puerta:</strong> tanda completa en --sim sin falsas alertas, parada general en todos los fallos. ✓</div>
+</section>
+
+<section class="etapa ok">
+  <div class="cab"><span class="num">ETAPA 1</span><h2>Radio y seguridad en mesa (sin motor)</h2><span class="chip c-ok estado">Cerrada</span></div>
+  <p class="que">Gateway + C3 + servo + mando. Demuestra que el enlace es fiable y que todo falla hacia neutro.</p>
+  <ul>
+    <li class="ok"><span><b>Radio ESP-NOW</b> 100 tramas/s, 0 errores, servo por radio</span></li>
+    <li class="ok"><span><b>Radio firmada</b> (HMAC + anti-repetición) <span class="ref">A6</span></span></li>
+    <li class="ok"><span><b>Firmware seguro del auto</b>: cuelgue → neutro en 196 ms, watchdog, rampa <span class="ref">A10 parte</span></span></li>
+    <li class="ok"><span><b>3 autos C3 a la vez</b> en la misma habitación</span></li>
+    <li class="ok"><span><b>Página "Auto en vivo"</b> con la C3 real: dirección, estados y gas en directo <span class="ref">A3</span></span></li>
+    <li class="ok"><span><b>Alcance exterior con GPS</b>: 50 m sin cortes con visión directa y potencias por defecto; failsafes cortos desde ~52 m (prueba de antenas aplazada) <span class="ref">A12</span></span></li>
+  </ul>
+  <div class="puerta"><strong>Puerta:</strong> sin contactos intermitentes; caída del PC → parada en &lt; 0,2 s; 1 auto sin cortes a 50 m con visión directa. ✓</div>
+</section>
+
+<section class="etapa curso">
+  <div class="cab"><span class="num">ETAPA 2</span><h2>Auto prototipo (Tamiya TT-02)</h2><span class="chip c-curso estado">Siguiente (llega 17 nov)</span></div>
+  <p class="que">Primer auto completo por radio, aún sin vídeo. En dos partes: primero el motor suelto en la mesa (seguro y sin montar nada), luego el kit montado.</p>
+  <p class="que"><b>2a · En la mesa, sin montar</b> (una tarde, ~1 h): motor 540 suelto y sujeto, sin piñón; variador TBLE-02S; batería Zeee; C3 por USB al Mac; --gas-max 0.2.</p>
+  <ul>
+    <li class="ok"><span><b>Variador</b> (RUIZHI): gas, freno → neutro → marcha atrás <span class="ref">A1 parte</span></span></li>
+    <li class="espera"><span><b>Calibrar el TBLE-02S</b> y comprobar la secuencia de marcha atrás de conduccion.py <span class="ref">A11</span></span></li>
+    <li class="espera"><span><b>Failsafe con el motor girando</b> <span class="ref">A1</span></span></li>
+    <li class="espera"><span><b>Ruido del motor en la radio</b> (errores, RSSI, pérdidas) <span class="ref">A1</span></span></li>
+    <li class="ok"><span><b>Antes, sin motor</b>: Fanatec en modo PC (mismos ejes) y pedales → servidor → radio → C3: gas, freno, freno → marcha atrás, sin gas fantasma al reconectar</span></li>
+    <li class="pend"><span><b>Giro del volante</b>: SEN en la base (270 / 360 / 540°) con ganancia 1,0; se puede hacer ya, sin el TT-02 <span class="ref">A15</span></span></li>
+    <li class="pend"><span><b>Pedales de la Fanatec</b> con el TBLE-02S: gas, freno, freno → marcha atrás (sin motor ya probado; falta con el variador real) <span class="ref">A1</span></span></li>
+    <li class="pend"><span><b>Variador a 100–200 Hz</b> y latencia medida <span class="ref">A10</span></span></li>
+  </ul>
+  <p class="que" style="margin-top:12px"><b>2b · Kit montado, en el suelo</b> (fin de semana, 4–6 h de montaje):</p>
+  <ul>
+    <li class="espera"><span><b>Montar el kit</b> + servo DS3218 + UBEC 5 V soldado + C3 <span class="ref">A11</span></span></li>
+    <li class="pend"><span><b>Primera conducción por radio</b> con el volante <span class="ref">A11</span></span></li>
+    <li class="pend"><span><b>Dirección de la Fanatec en el TT-02</b>: sentido de giro e ida a tope (invertir/trim en autos.json, ganancia en mandos.json)</span></li>
+    <li class="pend"><span><b>Sin cortes del BEC</b> con el servo girando con fuerza (si no: servo al UBEC)</span></li>
+    <li class="pend"><span><b>Potencia de emisión por auto</b> (~15 dBm) con la alimentación real <span class="ref">A10</span></span></li>
+    <li class="pend"><span><b>Antenas</b>: RSSI con la C3 dentro del auto; encontrar los ~33 dB que faltan, ANTES de comprar los C3 definitivos <span class="ref">A14</span></span></li>
+    <li class="pend"><span><b>Autonomía</b> de la batería NiMH y temperatura del motor/variador</span></li>
+  </ul>
+  <div class="puerta"><strong>Puerta:</strong> 2a: con el motor a fondo, 0 errores de radio y failsafe a neutro &lt; 0,25 s. 2b: 15 min seguidos conduciendo con el volante sin reinicios de la C3 ni failsafes inesperados. Firmware del auto cerrado → recargar autos 2 y 3.</div>
+</section>
+
+<section class="etapa pend">
+  <div class="cab"><span class="num">ETAPA 3</span><h2>Vídeo y gafas (por separado)</h2><span class="chip c-pend estado">Pendiente</span></div>
+  <p class="que">Validar la imagen antes de juntarla con el auto.</p>
+  <ul>
+    <li class="espera"><span><b>Quest 3S</b>: PixelPilot VR + capa de carrera con --sim <span class="ref">B1</span></span></li>
+    <li class="espera"><span><b>Cámara OpenIPC + RTL8812AU</b> con Aviateur en el Mac <span class="ref">B2</span></span></li>
+    <li class="espera"><span><b>Latencia</b> con/sin HUD y retraso de datos del HUD <span class="ref">B2</span></span></li>
+    <li class="pend"><span><b>Canal legal fijo</b> para el auto único (p. ej. 36 a 25 mW, a mano)</span></li>
+    <li class="pend"><span><b>Soporte de cámara</b> con disipación <span class="ref">C6</span></span></li>
+  </ul>
+  <div class="puerta"><strong>Puerta:</strong> latencia ≤ 50 ms, imagen estable, sin calentarse; HUD legible en la Quest.</div>
+</section>
+
+<section class="etapa pend">
+  <div class="cab"><span class="num">ETAPA 4</span><h2>Un auto completo en FPV</h2><span class="chip c-pend estado">Pendiente</span></div>
+  <p class="que">Volante + TT-02 + cámara + Quest: la experiencia real de un piloto.</p>
+  <ul>
+    <li class="pend"><span><b>Cámara en el TT-02</b> alimentada del UBEC (ruido, cortes)</span></li>
+    <li class="pend"><span><b>Conducir solo por las gafas</b> en un circuito de prueba</span></li>
+    <li class="pend"><span><b>Latencia total</b> volante → rueda → imagen</span></li>
+    <li class="ok"><span><b>Force feedback en macOS</b> (Fanatec DD Pro): amortiguación nativa + muelle por software, tope 10 %, vigilancia 151 ms <span class="ref">A16</span></span></li>
+    <li class="ok"><span><b>Force feedback en servidor.py</b>: muelle + amortiguación según el nivel de P1, editable en el panel, sube en 2 s <span class="ref">A16</span></span></li>
+    <li class="pend"><span><b>Force feedback en Windows</b> (mini PC) y Moza R3, misma interfaz de ffb.py; solo si la etapa 4 se hace con el mini PC <span class="ref">A7</span></span></li>
+    <li class="pend"><span><b>Prueba con personas</b> sin experiencia (mareo, facilidad)</span></li>
+  </ul>
+  <div class="puerta"><strong>Puerta:</strong> alguien nuevo da vueltas cómodo en FPV, con el volante centrándose solo, y quiere repetir. Aquí se decide comprar el auto definitivo.</div>
+</section>
+
+<section class="etapa pend">
+  <div class="cab"><span class="num">ETAPA 5</span><h2>Auto completo: todas las tecnologías validadas</h2><span class="chip c-pend estado">Pendiente</span></div>
+  <p class="que">OBJETIVO FINAL de esta hoja de ruta: un auto con todo validado y listo para replicar.</p>
+  <ul>
+    <li class="pend"><span><b>Force feedback según la velocidad</b> del auto (más peso y centrado cuanto más rápido) <span class="ref">A17</span></span></li>
+    <li class="pend"><span><b>Force feedback desde el IMU</b> del auto: golpes, derrapes, baches <span class="ref">A9</span></span></li>
+    <li class="pend"><span><b>Ficha del auto definitivo</b>: piezas, placa (según A14), conexiones y ajustes, para poder replicarlo</span></li>
+  </ul>
+  <div class="puerta"><strong>Puerta:</strong> un auto con control, vídeo, HUD, force feedback y failsafes validados, documentado para replicarlo. <b>Los 8 puestos se añadirán después como una hoja de ruta aparte.</b></div>
+</section>
+
+<p class="pie">Actualizado: 15 nov 2026. Fuera de esta hoja de ruta: seta física y panel siempre visible (A5, etapa del local); para los 8 puestos: A4, A13, C1, vídeo con varios autos y carrera real. Detalle de cada tarea en TAREAS.md (las referencias A/B/C son sus números).</p>
+</div>
+</body>
+</html>
