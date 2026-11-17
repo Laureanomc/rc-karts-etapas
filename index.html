@@ -88,7 +88,7 @@ li b{font-weight:500}
 </section>
 
 <section class="etapa curso">
-  <div class="cab"><span class="num">ETAPA 2</span><h2>Auto prototipo (Tamiya TT-02)</h2><span class="chip c-curso estado">Siguiente (llega 17 nov)</span></div>
+  <div class="cab"><span class="num">ETAPA 2</span><h2>Auto prototipo (MJX Hyper Go 14303)</h2><span class="chip c-curso estado">Siguiente (llega ~24 nov)</span></div>
   <p class="que">Primer auto completo por radio, aún sin vídeo. En dos partes: primero el motor suelto en la mesa (seguro y sin montar nada), luego el kit montado.</p>
   <p class="que"><b>2a · En la mesa, sin montar</b> (una tarde, ~1 h): motor 540 suelto y sujeto, sin piñón; variador TBLE-02S; batería Zeee; C3 por USB al Mac; --gas-max 0.2.</p>
   <ul>
@@ -97,15 +97,15 @@ li b{font-weight:500}
     <li class="espera"><span><b>Failsafe con el motor girando</b> <span class="ref">A1</span></span></li>
     <li class="espera"><span><b>Ruido del motor en la radio</b> (errores, RSSI, pérdidas) <span class="ref">A1</span></span></li>
     <li class="ok"><span><b>Antes, sin motor</b>: Fanatec en modo PC (mismos ejes) y pedales → servidor → radio → C3: gas, freno, freno → marcha atrás, sin gas fantasma al reconectar</span></li>
-    <li class="pend"><span><b>Giro del volante</b>: SEN en la base (270 / 360 / 540°) con ganancia 1,0; se puede hacer ya, sin el TT-02 <span class="ref">A15</span></span></li>
+    <li class="pend"><span><b>Giro del volante</b>: SEN en la base (270 / 360 / 540°) con ganancia 1,0; se puede hacer ya, sin el auto <span class="ref">A15</span></span></li>
     <li class="pend"><span><b>Pedales de la Fanatec</b> con el TBLE-02S: gas, freno, freno → marcha atrás (sin motor ya probado; falta con el variador real) <span class="ref">A1</span></span></li>
-    <li class="pend"><span><b>Calibrar el TBLE-02S</b> (neutro / máx. adelante / máx. atrás, motor desconectado) y modo NiMH; guía guias/tt02_banco.md</span></li>
+    <li class="pend"><span><b>Calibrar el E45B</b> (neutro / máx. adelante / máx. atrás, ruedas en el aire), medir su BEC y su marcha atrás; guía a adaptar <span class="ref">A20</span></span></li>
   </ul>
   <p class="que" style="margin-top:12px"><b>2b · Kit montado, en el suelo</b> (fin de semana, 4–6 h de montaje):</p>
   <ul>
     <li class="espera"><span><b>Montar el kit</b> + servo DS3218 + UBEC 5 V soldado + C3 <span class="ref">A11</span></span></li>
     <li class="pend"><span><b>Primera conducción por radio</b> con el volante <span class="ref">A11</span></span></li>
-    <li class="pend"><span><b>Dirección de la Fanatec en el TT-02</b>: sentido de giro e ida a tope (invertir/trim en autos.json, ganancia en mandos.json)</span></li>
+    <li class="pend"><span><b>Dirección de la Fanatec en el Hyper Go</b>: sentido de giro e ida a tope (invertir/trim en autos.json, ganancia en mandos.json)</span></li>
     <li class="pend"><span><b>Servo al UBEC</b> (el BEC del TBLE-02S da 1,5 A; el DS3218 puede pedir más) y sin cortes con el servo girando con fuerza</span></li>
     <li class="pend"><span><b>Potencia de emisión por auto</b> (~15 dBm) con la alimentación real <span class="ref">A10</span></span></li>
     <li class="pend"><span><b>Antenas</b>: RSSI con la C3 dentro del auto; encontrar los ~33 dB que faltan, ANTES de comprar los C3 definitivos <span class="ref">A14</span></span></li>
@@ -129,15 +129,15 @@ li b{font-weight:500}
 
 <section class="etapa pend">
   <div class="cab"><span class="num">ETAPA 4</span><h2>Un auto completo en FPV</h2><span class="chip c-pend estado">Pendiente</span></div>
-  <p class="que">Volante + TT-02 + cámara + Quest: la experiencia real de un piloto.</p>
+  <p class="que">Volante + Hyper Go + cámara + Quest: la experiencia real de un piloto.</p>
   <ul>
-    <li class="pend"><span><b>Cámara en el TT-02</b> alimentada del UBEC (ruido, cortes)</span></li>
+    <li class="pend"><span><b>Cámara en el Hyper Go</b> alimentada del UBEC (ruido, cortes)</span></li>
     <li class="pend"><span><b>Conducir solo por las gafas</b> en un circuito de prueba</span></li>
     <li class="pend"><span><b>Latencia total</b> volante → rueda → imagen</span></li>
     <li class="ok"><span><b>Force feedback en macOS</b> (Fanatec DD Pro): amortiguación nativa + muelle por software, tope 10 %, vigilancia 151 ms <span class="ref">A16</span></span></li>
     <li class="ok"><span><b>Force feedback en servidor.py</b>: muelle + amortiguación según el nivel de P1, editable en el panel, sube en 2 s <span class="ref">A16</span></span></li>
     <li class="pend"><span><b>Force feedback según la velocidad</b> (estimada por el gas): parado ligero, rápido más peso. PENDIENTE: notarlo y ajustarlo con el volante (código hecho y probado en simulador) <span class="ref">A17</span></span></li>
-    <li class="pend"><span><b>Force feedback en Windows</b> (mini PC) y Moza R3, misma interfaz de ffb.py; solo si la etapa 4 se hace con el mini PC <span class="ref">A7</span></span></li>
+    <li class="pend"><span><b>Volantes y force feedback en Linux</b> (mini PC): misma interfaz de ffb.py, Fanatec ahora y Moza R3 después; volantes por puerto USB; el prototipo termina en Linux <span class="ref">A19</span></span></li>
     <li class="pend"><span><b>Prueba con personas</b> sin experiencia (mareo, facilidad)</span></li>
   </ul>
   <div class="puerta"><strong>Puerta:</strong> alguien nuevo da vueltas cómodo en FPV, con el volante centrándose solo, y quiere repetir. Aquí se decide comprar el auto definitivo.</div>
