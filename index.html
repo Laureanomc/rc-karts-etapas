@@ -55,106 +55,116 @@ li b{font-weight:500}
 <body>
 <div class="wrap">
 <h1>RC Karts — Etapas de validación</h1>
-<p class="sub">Cada etapa se cierra cuando se cumple su <b>puerta</b>. No se pasa a la siguiente con riesgos abiertos en la anterior. <b>Objetivo: UN auto con todas las tecnologías validadas y preparadas (etapas 0–5). Los 8 puestos se planificarán después.</b></p>
+<p class="sub">RC Karts es un local en Porto donde 8 personas conducen a la vez autos de radiocontrol pequeños, sentadas en un asiento de simulador con volante y pedales, y viendo con unas gafas de realidad virtual lo que ve una cámara montada en el auto, como si fueran dentro. Esta página muestra, paso a paso, cómo comprobamos que la tecnología funciona antes de invertir en el local.</p>
+<p class="sub"><b>La meta de esta hoja de ruta es tener UN auto que funcione de principio a fin</b> (volante, radio, cámara, gafas y seguridad). Multiplicarlo por 8 viene después, en otro plan. Cada etapa termina con una <b>prueba de paso</b>: si no se supera, no se avanza.</p>
+
+<div class="puerta" style="margin-bottom:24px">
+<strong>Cómo funciona, en una línea:</strong> el volante va conectado a un ordenador → el ordenador envía las órdenes 100 veces por segundo a una pequeña emisora → la emisora las manda por radio a una placa electrónica dentro del auto (su "cerebro") → la placa mueve la dirección y el motor. En paralelo, la cámara del auto envía vídeo directamente a las gafas del piloto, y el ordenador dibuja encima la información de carrera (posición, vueltas, banderas).<br><br>
+<strong>Palabras que aparecen abajo:</strong>
+<b>modo seguro</b> = si el auto deja de recibir órdenes un instante, se para solo (dirección recta y motor a cero);
+<b>variador</b> = la pieza que regula la potencia del motor;
+<b>latencia</b> = retraso entre lo que pasa y lo que ves o haces (en milisegundos, ms);
+<b>force feedback</b> = el volante empuja y pesa como en un auto de verdad;
+<b>HUD</b> = la información de carrera dibujada encima de la imagen de las gafas.
+</div>
+
 <div class="leyenda">
   <span class="chip c-ok">Hecho</span><span class="chip c-curso">Siguiente / en curso</span>
   <span class="chip c-pend">Pendiente</span><span class="chip c-espera">Esperando material</span>
 </div>
 
 <section class="etapa ok">
-  <div class="cab"><span class="num">ETAPA 0</span><h2>Software y simulación</h2><span class="chip c-ok estado">Cerrada</span></div>
-  <p class="que">Todo lo que se puede validar sin hardware.</p>
+  <div class="cab"><span class="num">ETAPA 0</span><h2>Programas y simulador</h2><span class="chip c-ok estado">Cerrada</span></div>
+  <p class="que">Todo lo que se puede construir y probar sin autos de verdad: el programa que dirige la carrera y un simulador que imita 10 autos y 8 pilotos.</p>
   <ul>
-    <li class="ok"><span><b>Servidor + panel de control de pista</b> <span class="ref">2a</span></span></li>
-    <li class="ok"><span><b>Ajustes de conducción</b> (expo, rampa, marcha atrás, trim) <span class="ref">2b</span></span></li>
-    <li class="ok"><span><b>Simulador</b> 10 autos / 8 pilotos con fallos inyectables <span class="ref">2d</span></span></li>
-    <li class="ok"><span><b>HUD por puesto</b> + idiomas + PixelPilot con capa de carrera en el móvil <span class="ref">2e, C7</span></span></li>
+    <li class="ok"><span><b>Panel de control de pista</b>: el "puesto del director de carrera" en una web (salida, banderas, estado de cada auto) <span class="ref">2a</span></span></li>
+    <li class="ok"><span><b>Ajustes de conducción</b>: que el auto sea fácil para principiantes (dirección suave, aceleración progresiva, límite de velocidad por nivel) <span class="ref">2b</span></span></li>
+    <li class="ok"><span><b>Simulador</b> de 10 autos y 8 pilotos, en el que podemos provocar averías (pérdida de señal, batería baja, auto volcado) para ver cómo reacciona todo <span class="ref">2d</span></span></li>
+    <li class="ok"><span><b>Información en las gafas (HUD)</b> según el nivel del piloto y en su idioma, probada en un móvil <span class="ref">2e, C7</span></span></li>
   </ul>
-  <div class="puerta"><strong>Puerta:</strong> tanda completa en --sim sin falsas alertas, parada general en todos los fallos. ✓</div>
+  <div class="puerta"><strong>Prueba de paso:</strong> una carrera simulada completa sin falsas alarmas, y ante cualquier avería todos los autos se detienen. ✓</div>
 </section>
 
 <section class="etapa ok">
-  <div class="cab"><span class="num">ETAPA 1</span><h2>Radio y seguridad en mesa (sin motor)</h2><span class="chip c-ok estado">Cerrada</span></div>
-  <p class="que">Gateway + C3 + servo + mando. Demuestra que el enlace es fiable y que todo falla hacia neutro.</p>
+  <div class="cab"><span class="num">ETAPA 1</span><h2>Radio y seguridad, en la mesa y sin motor</h2><span class="chip c-ok estado">Cerrada</span></div>
+  <p class="que">Comprobar que las órdenes llegan al auto sin fallos y que, pase lo que pase, el auto se para solo. Se prueba con la placa del auto y el motor de dirección sobre la mesa.</p>
   <ul>
-    <li class="ok"><span><b>Radio ESP-NOW</b> 100 tramas/s, 0 errores, servo por radio</span></li>
-    <li class="ok"><span><b>Radio firmada</b> (HMAC + anti-repetición) <span class="ref">A6</span></span></li>
-    <li class="ok"><span><b>Firmware seguro del auto</b>: cuelgue → neutro en 196 ms, watchdog, rampa <span class="ref">A10 parte</span></span></li>
-    <li class="ok"><span><b>3 autos C3 a la vez</b> en la misma habitación</span></li>
-    <li class="ok"><span><b>Página "Auto en vivo"</b> con la C3 real: dirección, estados y gas en directo <span class="ref">A3</span></span></li>
-    <li class="ok"><span><b>Alcance exterior con GPS</b>: 50 m sin cortes con visión directa y potencias por defecto; failsafes cortos desde ~52 m (prueba de antenas aplazada) <span class="ref">A12</span></span></li>
+    <li class="ok"><span><b>Radio propia</b>: 100 órdenes por segundo sin un solo error, moviendo la dirección a distancia</span></li>
+    <li class="ok"><span><b>Radio protegida</b>: nadie de fuera puede mandar órdenes a nuestros autos ni repetir órdenes grabadas <span class="ref">A6</span></span></li>
+    <li class="ok"><span><b>Programa del auto a prueba de fallos</b>: si su placa se cuelga, el auto se para en 0,2 s y se reinicia solo <span class="ref">A10 parte</span></span></li>
+    <li class="ok"><span><b>3 autos a la vez</b> sin interferirse</span></li>
+    <li class="ok"><span><b>Página "Auto en vivo"</b>: ver en directo qué hace el auto (dirección, gas, estado) <span class="ref">A3</span></span></li>
+    <li class="ok"><span><b>Alcance en la calle</b>: 50 m sin cortes, mucho más de lo que mide el local. La mejora de antenas queda para más adelante <span class="ref">A12</span></span></li>
   </ul>
-  <div class="puerta"><strong>Puerta:</strong> sin contactos intermitentes; caída del PC → parada en &lt; 0,2 s; 1 auto sin cortes a 50 m con visión directa. ✓</div>
+  <div class="puerta"><strong>Prueba de paso:</strong> si el ordenador se apaga, el auto se para en menos de 0,2 s; y un auto funciona sin cortes a 50 m. ✓</div>
 </section>
 
 <section class="etapa curso">
-  <div class="cab"><span class="num">ETAPA 2</span><h2>Auto prototipo (MJX Hyper Go 14303)</h2><span class="chip c-curso estado">Siguiente (llega ~24 nov)</span></div>
-  <p class="que">Primer auto completo por radio, aún sin vídeo. En dos partes: primero el motor suelto en la mesa (seguro y sin montar nada), luego el kit montado.</p>
-  <p class="que"><b>2a · En la mesa, sin montar</b> (una tarde, ~1 h): motor 540 suelto y sujeto, sin piñón; variador TBLE-02S; batería Zeee; C3 por USB al Mac; --gas-max 0.2.</p>
+  <div class="cab"><span class="num">ETAPA 2</span><h2>Primer auto de verdad (MJX Hyper Go, escala 1/14)</h2><span class="chip c-curso estado">Siguiente (llega ~24 nov)</span></div>
+  <p class="que">Pasar de la mesa a un auto real con motor, todavía sin cámara. Se cambió el auto previsto (un Tamiya más grande) por este, que tiene el tamaño de los autos del local (32 cm de largo) y es candidato a ser el auto definitivo. Su placa original se sustituye por la nuestra.</p>
+  <p class="que"><b>2a · Con las ruedas en el aire</b> (seguro: el auto no puede moverse):</p>
   <ul>
-    <li class="ok"><span><b>Variador</b> (RUIZHI): gas, freno → neutro → marcha atrás <span class="ref">A1 parte</span></span></li>
-    <li class="espera"><span><b>Calibrar el TBLE-02S</b> y comprobar la secuencia de marcha atrás de conduccion.py <span class="ref">A11</span></span></li>
-    <li class="espera"><span><b>Failsafe con el motor girando</b> <span class="ref">A1</span></span></li>
-    <li class="espera"><span><b>Ruido del motor en la radio</b> (errores, RSSI, pérdidas) <span class="ref">A1</span></span></li>
-    <li class="ok"><span><b>Antes, sin motor</b>: Fanatec en modo PC (mismos ejes) y pedales → servidor → radio → C3: gas, freno, freno → marcha atrás, sin gas fantasma al reconectar</span></li>
-    <li class="pend"><span><b>Giro del volante</b>: SEN en la base (270 / 360 / 540°) con ganancia 1,0; se puede hacer ya, sin el auto <span class="ref">A15</span></span></li>
-    <li class="pend"><span><b>Pedales de la Fanatec</b> con el TBLE-02S: gas, freno, freno → marcha atrás (sin motor ya probado; falta con el variador real) <span class="ref">A1</span></span></li>
-    <li class="pend"><span><b>Calibrar el E45B</b> (neutro / máx. adelante / máx. atrás, ruedas en el aire), medir su BEC y su marcha atrás; guía a adaptar <span class="ref">A20</span></span></li>
+    <li class="ok"><span><b>Pedales del volante</b> → ordenador → radio → auto: acelerar, frenar y marcha atrás funcionan (probado sin motor)</span></li>
+    <li class="ok"><span><b>Primer variador de prueba</b> en la mesa: acelerar, frenar y marcha atrás <span class="ref">A1 parte</span></span></li>
+    <li class="espera"><span><b>Ajustar el variador del Hyper Go</b> a nuestras órdenes (punto cero, máximo adelante y atrás) y ver cómo entra la marcha atrás <span class="ref">A20</span></span></li>
+    <li class="espera"><span><b>Modo seguro con el motor girando</b>: cortar la radio y comprobar que el motor se para al instante <span class="ref">A1</span></span></li>
+    <li class="espera"><span><b>Interferencias del motor</b>: que el ruido eléctrico del motor no corte la radio <span class="ref">A1</span></span></li>
+    <li class="pend"><span><b>Giro del volante</b>: cuánto hay que girar el volante para llevar las ruedas a tope; se puede hacer ya, sin el auto <span class="ref">A15</span></span></li>
   </ul>
-  <p class="que" style="margin-top:12px"><b>2b · Kit montado, en el suelo</b> (fin de semana, 4–6 h de montaje):</p>
+  <p class="que" style="margin-top:12px"><b>2b · En el suelo, conduciendo</b> (mirando el auto, sin gafas):</p>
   <ul>
-    <li class="espera"><span><b>Montar el kit</b> + servo DS3218 + UBEC 5 V soldado + C3 <span class="ref">A11</span></span></li>
     <li class="pend"><span><b>Primera conducción por radio</b> con el volante <span class="ref">A11</span></span></li>
-    <li class="pend"><span><b>Dirección de la Fanatec en el Hyper Go</b>: sentido de giro e ida a tope (invertir/trim en autos.json, ganancia en mandos.json)</span></li>
-    <li class="pend"><span><b>Servo al UBEC</b> (el BEC del TBLE-02S da 1,5 A; el DS3218 puede pedir más) y sin cortes con el servo girando con fuerza</span></li>
-    <li class="pend"><span><b>Potencia de emisión por auto</b> (~15 dBm) con la alimentación real <span class="ref">A10</span></span></li>
-    <li class="pend"><span><b>Antenas</b>: RSSI con la C3 dentro del auto; encontrar los ~33 dB que faltan, ANTES de comprar los C3 definitivos <span class="ref">A14</span></span></li>
-    <li class="pend"><span><b>Autonomía</b> de la batería NiMH y temperatura del motor/variador</span></li>
+    <li class="pend"><span><b>Dirección bien ajustada</b>: que gire hacia el lado correcto y llegue a tope</span></li>
+    <li class="pend"><span><b>Dirección sin fallos de alimentación</b> al girar con fuerza o tras golpes contra la barrera</span></li>
+    <li class="pend"><span><b>Velocidad lenta y suave</b> para principiantes (el motor no debe ir a tirones; si va, se cambia un engranaje)</span></li>
+    <li class="pend"><span><b>Potencia de la radio</b> ajustada con la batería real del auto <span class="ref">A10</span></span></li>
+    <li class="pend"><span><b>Señal con la placa dentro del auto</b>: hoy la señal es más débil de lo que debería; hay que resolverlo antes de comprar las placas definitivas <span class="ref">A14</span></span></li>
+    <li class="pend"><span><b>Autonomía de la batería</b> y temperatura del motor tras una tanda</span></li>
   </ul>
-  <div class="puerta"><strong>Puerta:</strong> 2a: con el motor a fondo, 0 errores de radio y failsafe a neutro &lt; 0,25 s. 2b: 15 min seguidos conduciendo con el volante sin reinicios de la C3 ni failsafes inesperados. Firmware del auto cerrado → recargar autos 2 y 3.</div>
+  <div class="puerta"><strong>Prueba de paso:</strong> 2a: con el motor a tope, la radio no pierde órdenes y el auto se para en menos de 0,25 s al cortarla. 2b: 15 minutos seguidos conduciendo con el volante sin un solo fallo.</div>
 </section>
 
 <section class="etapa pend">
-  <div class="cab"><span class="num">ETAPA 3</span><h2>Vídeo y gafas (por separado)</h2><span class="chip c-pend estado">Pendiente</span></div>
-  <p class="que">Validar la imagen antes de juntarla con el auto.</p>
+  <div class="cab"><span class="num">ETAPA 3</span><h2>Cámara y gafas, por separado</h2><span class="chip c-pend estado">Pendiente</span></div>
+  <p class="que">Comprobar la imagen antes de montarla en el auto: que se vea nítida, sin cortes y con muy poco retraso.</p>
   <ul>
-    <li class="espera"><span><b>Quest 3S</b>: PixelPilot VR + capa de carrera con --sim <span class="ref">B1</span></span></li>
-    <li class="espera"><span><b>Cámara OpenIPC + RTL8812AU</b> con Aviateur en el Mac <span class="ref">B2</span></span></li>
-    <li class="espera"><span><b>Latencia</b> con/sin HUD y retraso de datos del HUD <span class="ref">B2</span></span></li>
-    <li class="pend"><span><b>Canal legal fijo</b> para el auto único (p. ej. 36 a 25 mW, a mano)</span></li>
-    <li class="pend"><span><b>Soporte de cámara</b> con disipación <span class="ref">C6</span></span></li>
+    <li class="espera"><span><b>Gafas (Meta Quest 3S)</b> mostrando la información de carrera con el simulador <span class="ref">B1</span></span></li>
+    <li class="espera"><span><b>Cámara digital del auto</b> recibida en el ordenador <span class="ref">B2</span></span></li>
+    <li class="espera"><span><b>Retraso de la imagen</b>, con y sin la información de carrera encima <span class="ref">B2</span></span></li>
+    <li class="pend"><span><b>Canal de vídeo legal</b> en Portugal, a baja potencia</span></li>
+    <li class="pend"><span><b>Soporte de la cámara</b> para el auto, impreso en 3D, que la mantenga fresca <span class="ref">C6</span></span></li>
   </ul>
-  <div class="puerta"><strong>Puerta:</strong> latencia ≤ 50 ms, imagen estable, sin calentarse; HUD legible en la Quest.</div>
+  <div class="puerta"><strong>Prueba de paso:</strong> retraso de la imagen de 50 ms o menos (una vigésima de segundo), imagen estable, cámara sin calentarse e información legible en las gafas.</div>
 </section>
 
 <section class="etapa pend">
-  <div class="cab"><span class="num">ETAPA 4</span><h2>Un auto completo en FPV</h2><span class="chip c-pend estado">Pendiente</span></div>
-  <p class="que">Volante + Hyper Go + cámara + Quest: la experiencia real de un piloto.</p>
+  <div class="cab"><span class="num">ETAPA 4</span><h2>Conducir con las gafas: la experiencia completa</h2><span class="chip c-pend estado">Pendiente</span></div>
+  <p class="que">Volante + auto + cámara + gafas juntos: lo que vivirá un cliente.</p>
   <ul>
-    <li class="pend"><span><b>Cámara en el Hyper Go</b> alimentada del UBEC (ruido, cortes)</span></li>
-    <li class="pend"><span><b>Conducir solo por las gafas</b> en un circuito de prueba</span></li>
-    <li class="pend"><span><b>Latencia total</b> volante → rueda → imagen</span></li>
-    <li class="ok"><span><b>Force feedback en macOS</b> (Fanatec DD Pro): amortiguación nativa + muelle por software, tope 10 %, vigilancia 151 ms <span class="ref">A16</span></span></li>
-    <li class="ok"><span><b>Force feedback en servidor.py</b>: muelle + amortiguación según el nivel de P1, editable en el panel, sube en 2 s <span class="ref">A16</span></span></li>
-    <li class="pend"><span><b>Force feedback según la velocidad</b> (estimada por el gas): parado ligero, rápido más peso. PENDIENTE: notarlo y ajustarlo con el volante (código hecho y probado en simulador) <span class="ref">A17</span></span></li>
-    <li class="pend"><span><b>Volantes y force feedback en Linux</b> (mini PC): misma interfaz de ffb.py, Fanatec ahora y Moza R3 después; volantes por puerto USB; el prototipo termina en Linux <span class="ref">A19</span></span></li>
-    <li class="pend"><span><b>Prueba con personas</b> sin experiencia (mareo, facilidad)</span></li>
+    <li class="pend"><span><b>Cámara montada en el auto</b>, sin cortes por el ruido del motor</span></li>
+    <li class="pend"><span><b>Conducir solo mirando por las gafas</b> en un circuito de prueba</span></li>
+    <li class="pend"><span><b>Retraso total</b>: desde que giras el volante hasta que lo ves en las gafas</span></li>
+    <li class="ok"><span><b>Volante que pesa y vuelve al centro</b> (force feedback) en el ordenador de pruebas <span class="ref">A16</span></span></li>
+    <li class="ok"><span><b>Fuerza del volante según el nivel</b> del piloto, ajustable desde el panel <span class="ref">A16</span></span></li>
+    <li class="pend"><span><b>Volante más pesado cuanto más rápido</b> va el auto: programado y probado en el simulador; falta notarlo y ajustarlo <span class="ref">A17</span></span></li>
+    <li class="pend"><span><b>Pasar todo al ordenador definitivo</b> del local (un mini PC con Linux) <span class="ref">A19</span></span></li>
+    <li class="pend"><span><b>Prueba con gente nueva</b>: ¿se marean?, ¿les resulta fácil?</span></li>
   </ul>
-  <div class="puerta"><strong>Puerta:</strong> alguien nuevo da vueltas cómodo en FPV, con el volante centrándose solo, y quiere repetir. Aquí se decide comprar el auto definitivo.</div>
+  <div class="puerta"><strong>Prueba de paso:</strong> alguien que nunca lo ha probado da vueltas cómodo con las gafas y quiere repetir. Aquí se decide qué auto se compra para el local.</div>
 </section>
 
 <section class="etapa pend">
-  <div class="cab"><span class="num">ETAPA 5</span><h2>Auto completo: todas las tecnologías validadas</h2><span class="chip c-pend estado">Pendiente</span></div>
-  <p class="que">OBJETIVO FINAL de esta hoja de ruta: un auto con todo validado y listo para replicar.</p>
+  <div class="cab"><span class="num">ETAPA 5</span><h2>Auto terminado y listo para copiar</h2><span class="chip c-pend estado">Pendiente</span></div>
+  <p class="que">Meta de esta hoja de ruta: un auto con todo probado y documentado para poder fabricar los demás iguales.</p>
   <ul>
-    <li class="pend"><span><b>Force feedback según la velocidad</b> del auto (más peso y centrado cuanto más rápido) <span class="ref">A17</span></span></li>
-    <li class="pend"><span><b>Force feedback desde el IMU</b> del auto: golpes, derrapes, baches <span class="ref">A9</span></span></li>
-    <li class="pend"><span><b>Ficha del auto definitivo</b>: piezas, placa (según A14), conexiones y ajustes, para poder replicarlo</span></li>
+    <li class="pend"><span><b>Volante más pesado cuanto más rápido</b>, ya ajustado con el auto real <span class="ref">A17</span></span></li>
+    <li class="pend"><span><b>Sentir el auto en el volante</b>: un sensor en el auto transmite golpes, derrapes y baches <span class="ref">A9</span></span></li>
+    <li class="pend"><span><b>Ficha del auto definitivo</b>: piezas, conexiones y ajustes, para replicarlo</span></li>
   </ul>
-  <div class="puerta"><strong>Puerta:</strong> un auto con control, vídeo, HUD, force feedback y failsafes validados, documentado para replicarlo. <b>Los 8 puestos se añadirán después como una hoja de ruta aparte.</b></div>
+  <div class="puerta"><strong>Prueba de paso:</strong> un auto con control, vídeo, información en gafas, volante con fuerza y seguridad probados, y documentado. <b>Los 8 puestos del local se planifican después, en otra hoja de ruta.</b></div>
 </section>
 
-<p class="pie">Actualizado: 16 nov 2026, 07:10. Fuera de esta hoja de ruta: seta física y panel siempre visible (A5, etapa del local); para los 8 puestos: A4, A13, C1, vídeo con varios autos y carrera real. Detalle de cada tarea en TAREAS.md (las referencias A/B/C son sus números).</p>
+<p class="pie">Actualizado: 17 nov 2026. Fuera de esta hoja de ruta: la seta de emergencia física del local y todo lo necesario para 8 autos a la vez (varios canales de vídeo, carreras reales). Los códigos A/B/C son los números de tarea del proyecto.</p>
 </div>
 </body>
 </html>
