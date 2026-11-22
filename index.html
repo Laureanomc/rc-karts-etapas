@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* PARA ACTUALIZAR: cambiar la clase de cada <li> (ok | curso | pend | espera)
-   y la clase de cada etapa (ok | curso | pend). Actualizado: 22 nov 2026, 13:10. */
+   y la clase de cada etapa (ok | curso | pend). Actualizado: 22 nov 2026, 13:30. */
 :root{
   --bg:#f6f7f9; --card:#fff; --ink:#1d2330; --mute:#667085; --line:#d0d5dd;
   --ok:#12805c; --ok-bg:#e3f5ec; --cur:#b54708; --cur-bg:#fef0c7;
@@ -123,50 +123,55 @@ li b{font-weight:500}
 
 <section class="etapa pend">
   <div class="cab"><span class="num">ETAPA 3</span><h2>Cámara en el auto y vídeo en el ordenador</h2><span class="chip c-pend estado">Pendiente</span></div>
-  <p class="que">Montar la cámara en el auto y recibir su imagen en el ordenador, vista en un monitor, con el auto andando.</p>
+  <p class="que">Montar la cámara en el auto y recibir su imagen en el ordenador, vista en un monitor, con el auto andando. Antes de invertir más, comprobar que esta cámara es lo bastante rápida.</p>
   <ul>
     <li class="pend"><span><b>Canal de vídeo legal</b> en Portugal, a baja potencia</span></li>
-    <li class="ok"><span><b>Receptor de vídeo</b> en el ordenador del local (mini PC con Linux y la antena de vídeo), probado sin cámara (22 nov) <span class="ref">B2</span></span></li>
+    <li class="ok"><span><b>Receptor de vídeo</b> en el ordenador del local (mini PC con Linux y la antena de vídeo), probado sin cámara (22 nov) <span class="ref">B2 E1</span></span></li>
     <li class="espera"><span><b>Cámara digital del auto</b> recibida en el ordenador <span class="ref">B2</span></span></li>
+    <li class="espera"><span><b>Primera medida del retraso de la imagen</b> (cámara apuntando a un cronómetro en pantalla, foto con el móvil): decide si seguimos con esta cámara <span class="ref">B2 E1</span></span></li>
     <li class="pend"><span><b>Soporte de la cámara</b> para el auto, impreso en 3D, que la mantenga fresca <span class="ref">C6</span></span></li>
     <li class="pend"><span><b>Cámara montada en el auto</b> y alimentada por él, sin cortes por el ruido del motor</span></li>
+    <li class="pend"><span><b>Autonomía y temperatura con la cámara</b>: cuántas tandas aguanta la batería y que nada se caliente dentro del auto <span class="ref">A28</span></span></li>
+    <li class="pend"><span><b>Si se corta el vídeo</b>: el director recibe un aviso y el auto pasa a amarilla o se para (el piloto no puede conducir a ciegas) <span class="ref">C10</span></span></li>
   </ul>
-  <div class="puerta"><strong>Prueba de paso:</strong> con el auto andando, la imagen de su cámara llega al ordenador y se ve en el monitor estable y sin cortes durante una tanda, y la cámara no se calienta.</div>
+  <div class="puerta"><strong>Prueba de paso:</strong> retraso de la imagen aceptable para seguir con esta cámara; con el auto andando, la imagen llega al monitor estable y sin cortes durante una tanda; la cámara no se calienta, y un corte de vídeo deja el auto seguro.</div>
 </section>
 
 <section class="etapa pend">
-  <div class="cab"><span class="num">ETAPA 4</span><h2>Lo mismo, en las gafas</h2><span class="chip c-pend estado">Pendiente · opcional</span></div>
-  <p class="que">La misma imagen, pero en las gafas del piloto. <b>Opcional:</b> todavía no se sabe si el local empezará con gafas o con monitores; si se elige monitor, esta etapa se salta y se retoma más adelante.</p>
+  <div class="cab"><span class="num">ETAPA 4</span><h2>Monitor y gafas, cara a cara</h2><span class="chip c-pend estado">Pendiente</span></div>
+  <p class="que">El local puede empezar con monitores (más sencillo) o con gafas (más inmersivo). Como ya tenemos unas gafas, se prueban las dos cosas con el mismo auto y se decide con datos.</p>
   <ul>
+    <li class="pend"><span><b>Información de carrera sobre el vídeo en el monitor</b> (posición, vueltas, banderas), como ya existe en las gafas <span class="ref">E3</span></span></li>
     <li class="ok"><span><b>Gafas (Meta Quest 3S)</b> mostrando la información de carrera con el simulador <span class="ref">B1</span></span></li>
     <li class="ok"><span><b>Antena de vídeo conectada a las gafas</b> y escuchando el canal, probada sin cámara (21 nov)</span></li>
     <li class="pend"><span><b>Vídeo de la cámara del auto en las gafas</b>, con la información de carrera encima y legible</span></li>
-    <li class="pend"><span><b>Conducir solo mirando por las gafas</b> en un circuito de prueba</span></li>
+    <li class="pend"><span><b>Retraso de la imagen en cada pantalla</b>: monitor y gafas por separado (las gafas añaden el suyo) <span class="ref">E2</span></span></li>
+    <li class="pend"><span><b>Una tanda con cada una</b>: comodidad, mareo, facilidad y qué prefiere el piloto; la prueba amplia con gente nueva es la de la etapa 5 <span class="ref">E6</span></span></li>
   </ul>
-  <div class="puerta"><strong>Prueba de paso:</strong> la imagen del auto se ve en las gafas igual de estable que en el monitor, la información se lee bien y se puede conducir una tanda mirando solo por ellas.</div>
+  <div class="puerta"><strong>Prueba de paso:</strong> se puede conducir una tanda entera con el monitor y otra con las gafas, y queda decidido con qué se empieza en el local (monitor, gafas o las dos).</div>
 </section>
 
 <section class="etapa pend">
   <div class="cab"><span class="num">ETAPA 5</span><h2>Retraso ajustado: una buena experiencia</h2><span class="chip c-pend estado">Pendiente</span></div>
-  <p class="que">Medir y bajar los retrasos hasta que conducir sea natural, en el monitor o en las gafas (según lo que se elija).</p>
+  <p class="que">Con la pantalla elegida, bajar los retrasos hasta que conducir sea natural, y probarlo con gente que nunca lo ha hecho.</p>
   <ul>
-    <li class="espera"><span><b>Retraso de la imagen</b>, con y sin la información de carrera encima <span class="ref">B2</span></span></li>
-    <li class="pend"><span><b>Retraso total</b>: desde que giras el volante hasta que lo ves en la pantalla</span></li>
-    <li class="pend"><span><b>Ajustes para bajarlo</b>: resolución, imágenes por segundo y calidad de la cámara, receptor y pantalla</span></li>
-    <li class="pend"><span><b>Prueba con gente nueva</b>: ¿se marean?, ¿les resulta fácil?</span></li>
+    <li class="pend"><span><b>Ajustes para bajar el retraso de la imagen</b>: resolución, imágenes por segundo y calidad de la cámara, receptor y pantalla <span class="ref">B2</span></span></li>
+    <li class="pend"><span><b>Retraso total medido y anotado</b>: desde que giras el volante hasta que lo ves en la pantalla (incluye la radio y lo que tarda el servo en moverse)</span></li>
+    <li class="pend"><span><b>Prueba con gente nueva</b>: ¿se marean?, ¿les resulta fácil?, ¿quieren repetir? <span class="ref">E6</span></span></li>
   </ul>
-  <div class="puerta"><strong>Prueba de paso:</strong> retraso de la imagen de 50 ms o menos (una vigésima de segundo) y alguien que nunca lo ha probado da vueltas cómodo y quiere repetir. Aquí se decide qué auto se compra para el local y si se empieza con gafas o con monitor.</div>
+  <div class="puerta"><strong>Prueba de paso:</strong> retraso de la imagen de 50 ms o menos (una vigésima de segundo) en la pantalla elegida; el retraso total, medido y anotado. Y lo que de verdad cuenta: alguien que nunca lo ha probado da vueltas cómodo y quiere repetir. Aquí se decide qué auto se compra para el local.</div>
 </section>
 
 <section class="etapa pend">
   <div class="cab"><span class="num">ETAPA 6</span><h2>Auto terminado y listo para copiar</h2><span class="chip c-pend estado">Pendiente</span></div>
-  <p class="que">Meta de esta hoja de ruta: un auto con todo probado y documentado para poder fabricar los demás iguales.</p>
+  <p class="que">Meta de esta hoja de ruta: un auto con todo probado y documentado para poder fabricar los demás iguales. Los puntos marcados como <b>extra</b> mejoran la experiencia pero no impiden copiar el auto.</p>
   <ul>
     <li class="ok"><span><b>Volante que pesa y vuelve al centro</b> (force feedback) en el ordenador de pruebas <span class="ref">A16</span></span></li>
     <li class="ok"><span><b>Fuerza del volante según el nivel</b> del piloto, ajustable desde el panel <span class="ref">A16</span></span></li>
     <li class="ok"><span><b>Pasar todo al ordenador definitivo</b> del local (un mini PC con Linux: volante, force feedback y radio con el gateway XIAO funcionando, 20 nov) <span class="ref">A19</span></span></li>
-    <li class="pend"><span><b>Volante más pesado cuanto más rápido</b> va el auto: programado y probado en el simulador; falta ajustarlo con el auto real <span class="ref">A17</span></span></li>
-    <li class="curso"><span><b>Sentir el auto en el volante</b>: un sensor en el auto transmite golpes, derrapes y baches <span class="ref">A9</span></span></li>
+    <li class="pend"><span><b>Extra · Volante más pesado cuanto más rápido</b> va el auto: programado y probado en el simulador; falta ajustarlo con el auto real <span class="ref">A17</span></span></li>
+    <li class="curso"><span><b>Extra · Sentir el auto en el volante</b>: un sensor en el auto transmite golpes, derrapes y baches <span class="ref">A9</span></span></li>
+    <li class="pend"><span><b>Conexiones definitivas</b>: decidir si el auto se copia con cables sueltos y el regulador actual o con una placa propia que lo reúne todo (en pausa) <span class="ref">A29</span></span></li>
     <li class="pend"><span><b>Pruebas a fondo con el auto cerrado</b> (carrocería, cámara y conexiones definitivas; pasadas desde la 2b el 22 nov):</span></li>
     <li class="curso"><span><b>Velocidad lenta y suave</b> para principiantes: Principiante (30 %) arranca suave sin tirones; Normal (45 %) va muy bien, aunque sobra velocidad en un espacio cerrado (21 nov) · falta medir la velocidad de cada nivel y decidir el piñón <span class="ref">A21 A22</span></span></li>
     <li class="pend"><span><b>Señal con la placa dentro del auto</b>: medida a 3 m (21 nov): la carrocería no influye, pero el motor girando cuesta señal. 22 nov: con la emisora XIAO de antena de varilla, una tanda de 10 min sin un solo aviso de señal débil (con la DevKit, 83) · falta una tanda de 10 min en el punto más lejano del local con la emisora XIAO <span class="ref">A14</span></span></li>
@@ -177,7 +182,7 @@ li b{font-weight:500}
   <div class="puerta"><strong>Prueba de paso:</strong> un auto con control, vídeo, información de carrera en pantalla (gafas o monitor), volante con fuerza y seguridad probados, y documentado. <b>Los 8 puestos del local se planifican después, en otra hoja de ruta.</b></div>
 </section>
 
-<p class="pie">Actualizado: 22 nov 2026, 13:10. Fuera de esta hoja de ruta: la seta de emergencia física del local y todo lo necesario para 8 autos a la vez (varios canales de vídeo, carreras reales). Los códigos A/B/C son los números de tarea del proyecto.</p>
+<p class="pie">Actualizado: 22 nov 2026, 13:30. Fuera de esta hoja de ruta: la seta de emergencia física del local y todo lo necesario para 8 autos a la vez (varios canales de vídeo, carreras reales). Los códigos A/B/C son los números de tarea del proyecto.</p>
 </div>
 </body>
 </html>
